@@ -12,10 +12,16 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
 body {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 canvas {
-  display: inherit;
+  display: block;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
 }

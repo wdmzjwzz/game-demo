@@ -13,11 +13,11 @@ class Scene extends Component<Partial<Props>>{
 
   componentDidMount(): void {
     AppManager.init();
-    AppManager.play(); 
+    AppManager.play();
   }
 
   render() {
-    const { FPS } = this.props.rootState! 
+    const { FPS } = this.props.rootState!
     return <div>
       <span>FPS: {FPS}</span>
     </div>;

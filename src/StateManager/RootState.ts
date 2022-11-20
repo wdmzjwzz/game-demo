@@ -4,7 +4,7 @@ export class RootState {
     constructor() {
         makeAutoObservable(this)
     }
-    FPS = 10;
+    FPS = 0;
 
     setFPS(fps: number) {
         this.FPS = fps
