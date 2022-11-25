@@ -1,1 +1,3 @@
-export default class Equipment {}
+import BaseEquipment from "./BaseEquipment";
+
+export { BaseEquipment };
