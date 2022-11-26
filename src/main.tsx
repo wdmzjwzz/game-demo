@@ -3,16 +3,20 @@ import ReactDOM from 'react-dom/client'
 import MainScene from './views/Scences/MainScene'
 import './index.css'
 import rootStateManager from './StateManager'
-import { Provider } from 'mobx-react' 
+import { Provider } from 'mobx-react'
+import PlayerInfo from './views/PlayerInfo'
 class App extends Component {
   render() {
-    return <MainScene />
+    return <>
+      <MainScene />
+      <PlayerInfo />
+    </>
   }
 }
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <Provider {...rootStateManager}>
       <App />
-    </Provider> 
+    </Provider>
   </React.StrictMode>
 )

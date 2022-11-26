@@ -1,5 +1,5 @@
 export class HealthPoint {
-  constructor(maxValue = 0) {
+  constructor(maxValue = 100) {
     this.maxValue = maxValue;
     this.currentValue = maxValue;
   }

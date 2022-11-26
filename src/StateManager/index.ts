@@ -4,9 +4,7 @@ import { RootState } from "./RootState";
 export class RootStateManager {
     public rootState: RootState
     constructor() {
-        this.rootState = new RootState()
-        console.log(this.rootState);
-
+        this.rootState = new RootState();
     }
 
 }

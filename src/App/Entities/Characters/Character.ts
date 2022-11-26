@@ -1,10 +1,16 @@
 import { HealthPoint } from "../HealthPoint";
-import { v4 as uuidv4 } from "uuid";
 import { BaseEquipment } from "../Equipments";
 import { Status } from "./Status";
 import { Soul } from "./Soul";
-export default class Character {
-  public id = uuidv4();
+import { BaseEntity } from "../BaseEntity/BaseEntity";
+import { PowerPoint } from "../HealthPoint/PowerPoint";
+export enum Gender {
+  MALE = "MALE",
+  FAMALE = "FAMALE",
+  NEUTRAL = "NEUTRAL"
+}
+export default class Character extends BaseEntity {
+  public powerPoint = new PowerPoint()
   public healthPoint = new HealthPoint();
   public soul = new Soul(this);
   public displayName: string | undefined;
@@ -12,4 +18,5 @@ export default class Character {
   public baseAggressivity = 0;
   public defensive = 1;
   public equipments: BaseEquipment[] = [];
+  public gender = Gender.NEUTRAL;
 }
