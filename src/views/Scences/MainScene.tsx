@@ -25,7 +25,7 @@ class Scene extends Component<Partial<Props>>{
   render() {
     const { FPS } = this.props.rootState!
     return <div>
-      <span>FPS: {FPS}</span>
+      <span className="fps">FPS: {FPS}</span>
       <canvas ref={this.canvasRef} />
     </div>;
   }
