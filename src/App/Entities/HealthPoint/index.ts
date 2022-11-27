@@ -16,7 +16,7 @@ export class HealthPoint {
     this.maxValue = value;
   }
   public setCurrentValue(value: number) {
-    const realValue = Math.max(0, Math.min(value, this.maxValue));
+    const realValue = Math.max(0, value);
     this.currentValue = realValue;
   }
   /**

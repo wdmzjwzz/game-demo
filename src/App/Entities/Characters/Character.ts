@@ -31,9 +31,9 @@ export default class Character extends BaseEntity {
     const levelInfo = this.levelInfo.find((item) => {
       return item.level === currentLevel
     })
-    return levelInfo?.defensive
+    return levelInfo?.baseDefensive
   }
-  get baseAggressivity() {
+  get aggressivity() {
     const currentLevel = this.powerPoint.level!
     const levelInfo = this.levelInfo.find((item) => {
       return item.level === currentLevel

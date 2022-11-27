@@ -11,7 +11,7 @@ interface BasePlayerInfo {
     maxHealthPoint: number,
     maxPowerPoint: number,
     baseAggressivity: number,
-    defensive: number,
+    baseDefensive: number,
     baseGrowthValue?: number
 }
 export const LevelInfo: BasePlayerInfo[] = [
@@ -20,7 +20,7 @@ export const LevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 500,
         maxPowerPoint: 500,
         baseAggressivity: 10,
-        defensive: 5,
+        baseDefensive: 5,
         baseGrowthValue: 10
     },
     {
@@ -28,7 +28,7 @@ export const LevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 1000,
         maxPowerPoint: 1000,
         baseAggressivity: 100,
-        defensive: 50,
+        baseDefensive: 50,
         baseGrowthValue: 20
     },
     {
@@ -36,7 +36,7 @@ export const LevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 3000,
         maxPowerPoint: 3000,
         baseAggressivity: 500,
-        defensive: 100,
+        baseDefensive: 100,
         baseGrowthValue: 50
     },
     {
@@ -44,7 +44,7 @@ export const LevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 10000,
         maxPowerPoint: 10000,
         baseAggressivity: 1000,
-        defensive: 800,
+        baseDefensive: 800,
         baseGrowthValue: 100
     },
     {
@@ -52,7 +52,7 @@ export const LevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 50000,
         maxPowerPoint: 50000,
         baseAggressivity: 5000,
-        defensive: 1000,
+        baseDefensive: 1000,
         baseGrowthValue: 300
     },
 ]
@@ -62,7 +62,7 @@ export const SoulLevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 500,
         maxPowerPoint: 500,
         baseAggressivity: 10,
-        defensive: 5,
+        baseDefensive: 5,
         baseGrowthValue: 10
     },
     {
@@ -70,7 +70,7 @@ export const SoulLevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 1000,
         maxPowerPoint: 1000,
         baseAggressivity: 100,
-        defensive: 50,
+        baseDefensive: 50,
         baseGrowthValue: 30
     },
     {
@@ -78,7 +78,7 @@ export const SoulLevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 3000,
         maxPowerPoint: 3000,
         baseAggressivity: 300,
-        defensive: 100,
+        baseDefensive: 100,
         baseGrowthValue: 100
     },
     {
@@ -86,7 +86,7 @@ export const SoulLevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 10000,
         maxPowerPoint: 10000,
         baseAggressivity: 1000,
-        defensive: 400,
+        baseDefensive: 400,
         baseGrowthValue: 300
     },
     {
@@ -94,7 +94,7 @@ export const SoulLevelInfo: BasePlayerInfo[] = [
         maxHealthPoint: 50000,
         maxPowerPoint: 50000,
         baseAggressivity: 3000,
-        defensive: 800,
+        baseDefensive: 800,
         baseGrowthValue: 500
     },
 ]

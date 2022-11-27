@@ -21,18 +21,12 @@ export class PowerPoint extends HealthPoint {
         const info = this.parent.levelInfo.find((item) => item.maxPowerPoint === this.maxValue)
         return info?.level
     }
-
     compute(value: number) {
-        if (this.currentValue >= this.maxValue) {
-            eventHandler.dispatch({
-                type: ActionType.abortTrain,
-                param: this.parent
-            });
-            this.parent.status.setState(StatusState.BREAKING)
-            return
-        }
         const realValue = value + this.currentValue;
         this.setCurrentValue(Number(realValue.toFixed()));
+        if (this.currentValue >= this.maxValue) { 
+            this.parent.status.setState(StatusState.BREAKING) 
+        }
     }
     public levelUp(): void {
         const newInfo = this.parent.getNextLevel()

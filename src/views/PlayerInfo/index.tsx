@@ -21,7 +21,7 @@ class PlayerInfo extends Component<Partial<Props>>{
         eventHandler.dispatch({
             type: ActionType.training,
             param: player
-        }) 
+        })
     }
     render() {
         const { gameData } = this.props.rootState!
@@ -34,8 +34,9 @@ class PlayerInfo extends Component<Partial<Props>>{
                     <span>血量：{playerInfo.healthPoint?.currentValue}</span>
                     <span>修为：{playerInfo.powerPoint.level}</span>
                     <span>法力值：{playerInfo.powerPoint.currentValue}/{playerInfo.powerPoint.maxValue}</span>
- 
 
+                    <span>攻击力：{playerInfo.aggressivity}</span>
+                    <span>防御力：{playerInfo.defensive}</span>
                     <Button
                         size={"md"}
                         onClick={() => {
@@ -63,14 +64,17 @@ class PlayerInfo extends Component<Partial<Props>>{
                     <h3>灵魂信息</h3>
                     <span>灵魂HP：{playerInfo.soul.healthPoint?.currentValue}</span>
                     <span>修为：{playerInfo.soul.powerPoint.level}</span>
-                    <span>魂力：{playerInfo.soul.powerPoint.currentValue}/{playerInfo.soul.powerPoint.maxValue}</span> 
+                    <span>魂力：{playerInfo.soul.powerPoint.currentValue}/{playerInfo.soul.powerPoint.maxValue}</span>
+
+                    <span>攻击力：{playerInfo.soul.aggressivity}</span>
+                    <span>防御力：{playerInfo.soul.defensive}</span>
                     <Button
                         size={"md"}
                         onClick={() => {
                             eventHandler.dispatch({
                                 type: ActionType.training,
                                 param: playerInfo.soul
-                            }) 
+                            })
                         }}
                         style={{
                             marginBottom: 14

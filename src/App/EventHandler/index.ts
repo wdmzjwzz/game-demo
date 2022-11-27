@@ -47,7 +47,7 @@ export class EventHandler {
         player.status.setState(StatusState.TRAINING)
         const id = this.gameManager!.addTimer(() => {
             const addedPower = player.powerPoint.baseGrowthValue * player.getGrowthSpeed()
-            player.powerPoint.compute(addedPower*10);
+            player.powerPoint.compute(addedPower);
         }, 1)
         this.timmerIds.set(action.type, id)
     }
