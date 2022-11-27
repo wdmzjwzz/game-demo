@@ -37,11 +37,11 @@ export class CureSkill extends BaseSkill {
 
     update() {
         const info = CureSkillInfos[this.currentLevel]
-        this.consume = info.consume;
+        this.consume = info.consume + this.player.powerPoint.maxValue * 0.02;
         this.levelLabel = info.levelLabel
         this.cureValue = info.cureValue
     }
     getComputeValue() {
-        return this.cureValue
+        return this.cureValue + this.player.powerPoint.maxValue * 0.1
     }
 }

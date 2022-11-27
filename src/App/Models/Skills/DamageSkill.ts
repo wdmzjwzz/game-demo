@@ -33,11 +33,11 @@ export class DamageSkill extends BaseSkill {
 
     update() {
         const info = DamageSkillInfos[this.currentLevel]
-        this.consume = info.consume;
+        this.consume = info.consume + this.player.powerPoint.maxValue * 0.02;
         this.levelLabel = info.levelLabel
         this.damageValue = info.damageValue
     }
     getComputeValue() {
-        return this.damageValue
+        return this.damageValue + this.player.powerPoint.maxValue * 0.1
     }
 }

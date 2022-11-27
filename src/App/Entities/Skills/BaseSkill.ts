@@ -21,7 +21,7 @@ export default class BaseSkill {
     public currentLevel = 0
     public player: Character
     constructor(player: Character) {
-        this.player = player
+        this.player = player; 
     }
 
     getComputeValue() {

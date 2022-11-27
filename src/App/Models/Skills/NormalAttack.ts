@@ -9,6 +9,6 @@ export class NormalAttack extends BaseSkill {
         this.player = player
     }
     getComputeValue() {
-        return this.player.aggressivity
+        return this.player.aggressivity + this.player.powerPoint.maxValue * 0.005
     }
 }
