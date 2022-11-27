@@ -12,7 +12,7 @@ interface Props extends RootStateManager {
 class Scene extends Component<Partial<Props>>{
   private canvasRef = React.createRef<HTMLCanvasElement>()
   componentDidMount(): void {
-    if (this.canvasRef.current) { 
+    if (this.canvasRef.current && !gameManager.canvas) {
       gameManager.initCanvas(this.canvasRef.current)
       gameManager.addTimer(() => {
         this.props.rootState!.setFPS(Number(gameManager.fps.toFixed(2)))

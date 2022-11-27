@@ -20,8 +20,8 @@ const GrowthMap = new Map<AttributeLevel, number>([
     [AttributeLevel.BEST, 1.5]
 ])
 export class Attribute {
-    type = AttributeType.FEN;
-    level = AttributeLevel.LOW;
+    constructor(public type = AttributeType.FEN, public level = AttributeLevel.LOW) {
+    }
     overlying() {
         const growthSpeed = GrowthMap.get(this.level);
         return growthSpeed || 1;

@@ -15,6 +15,8 @@ export class RootState {
         this.gameManager = gameManager
     }
     setGameData(data: any) {
+        console.log(data,22);
+        
         this.gameData = data
     }
 } 

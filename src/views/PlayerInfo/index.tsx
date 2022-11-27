@@ -26,13 +26,16 @@ class PlayerInfo extends Component<Partial<Props>>{
     render() {
         const { gameData } = this.props.rootState!
         const playerInfos = (gameData?.children || []) as Player[]
-        return <div>
 
+        return <div className="playerInfo">
             {playerInfos.map(playerInfo => {
-                return <div className="playerInfo" key={playerInfo.id}>
+                return <div className="player" key={playerInfo.id}>
                     <span>名字：{playerInfo.displayName}</span>
                     <span>血量：{playerInfo.healthPoint?.currentValue}</span>
                     <span>修为：{playerInfo.powerPoint.level}</span>
+                    <span>天赋：{playerInfo.attributes.map(att => {
+                        return att.type + "/" + att.level
+                    })}</span>
                     <span>法力值：{playerInfo.powerPoint.currentValue}/{playerInfo.powerPoint.maxValue}</span>
 
                     <span>攻击力：{playerInfo.aggressivity}</span>

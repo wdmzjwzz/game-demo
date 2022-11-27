@@ -14,7 +14,7 @@ export interface Action {
 }
 export class EventHandler {
     gameManager: GameManager | null = null;
-    timmerIds: Map<ActionType, number> = new Map()
+    timmerIds: Map<string, number> = new Map()
     init(gameManager: GameManager) {
         this.gameManager = gameManager
     }
@@ -31,7 +31,7 @@ export class EventHandler {
                 this.onAbortTraining(action)
                 break;
             case ActionType.levelUp:
-                this.onLevelUp(action, callback)
+                this.onLevelUp(action)
                 break;
             default:
                 break;
@@ -39,28 +39,31 @@ export class EventHandler {
 
     }
     onTraining(action: Action, callback?: Function) {
-        const trainId = this.timmerIds.get(ActionType.training);
         let player = action.param as Player
+        const trainId = this.timmerIds.get(ActionType.training + player.id);
+
         if (trainId) {
             return
         }
         player.status.setState(StatusState.TRAINING)
         const id = this.gameManager!.addTimer(() => {
             const addedPower = player.powerPoint.baseGrowthValue * player.getGrowthSpeed()
-            player.powerPoint.compute(addedPower);
+            player.powerPoint.compute(addedPower
+            );
         }, 1)
-        this.timmerIds.set(action.type, id)
+        this.timmerIds.set(action.type + player.id, id)
     }
-    onAbortTraining(action: Action, callback?: Function) {
-        const trainId = this.timmerIds.get(ActionType.training);
+    onAbortTraining(action: Action) {
         let player = action.param as Player
+        const trainId = this.timmerIds.get(ActionType.training + player.id);
+
         if (trainId) {
             this.gameManager!.removeTimer(trainId)
-            this.timmerIds.delete(ActionType.training)
+            this.timmerIds.delete(ActionType.training + player.id)
             player.status.setState(StatusState.IDLE)
         }
     }
-    onLevelUp(action: Action, callback?: Function) {
+    onLevelUp(action: Action) {
         let player = action.param as Player;
         if (!player) {
             throw new Error("player is undefind");

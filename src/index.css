@@ -29,15 +29,7 @@ canvas {
   width: 100%;
 }
 
-.playerInfo {
-  position: absolute;
-  z-index: 9;
-  width: 50%;
-  right: 0;
-  height: 100vh;
-  background-color: aliceblue;
-  margin-bottom: 14px;
-}
+
 
 .fps {
   position: absolute;
@@ -46,7 +38,19 @@ canvas {
   left: 14px;
 }
 
-.playerInfo>span {
+.playerInfo {
+  position: absolute;
+  z-index: 9;
+  width: 50%;
+  right: 0;
+  height: 100vh;
+  background-color: aliceblue;
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.player>span {
   display: block;
   margin-bottom: 14px;
   color: black;
