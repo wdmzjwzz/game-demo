@@ -34,10 +34,18 @@ export class GameManager extends Application {
         npcPlayer.isSelf = false
         this.scene.addChildren(player)
         this.scene.addChildren(npcPlayer)
-
+        this.startAutoRecover()
+    }
+    startAutoRecover() {
         this.autoRecoverTimmer = this.addTimer(() => {
             this.autoRecover()
         }, 1)
+    }
+    stopAutoRecover() {
+        if (this.autoRecoverTimmer === -1) {
+            return
+        }
+        this.removeTimer(this.autoRecoverTimmer)
     }
     autoRecover() {
         this.scene.children.forEach(entity => {

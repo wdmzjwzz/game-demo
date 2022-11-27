@@ -25,11 +25,13 @@ export class HealthPoint {
     const realValue = Math.max(0, Math.min(value, this.maxValue));
     this.currentValue = realValue;
     if (this.currentValue === 0) {
-      this.parent.status.setState(StatusState.DEAD);
-      eventHandler.dispatch({
-        type: ActionType.dead,
-        param: this.parent
-      })
+      requestAnimationFrame(() => {
+        this.parent.status.setState(StatusState.DEAD);
+        eventHandler.dispatch({
+          type: ActionType.dead,
+          param: this.parent
+        })
+      }) 
     }
   }
   /**
