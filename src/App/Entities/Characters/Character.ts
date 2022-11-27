@@ -15,13 +15,17 @@ export default class Character extends BaseEntity {
   public displayName: string | undefined;
 
   public equipments: BaseEquipment[] = [];
-  public gender = Gender.NEUTRAL; 
+  public gender = Gender.NEUTRAL;
   public levelInfo = LevelInfo;
 
   public powerPoint = new PowerPoint(this)
   public healthPoint = new HealthPoint(this);
   public status = new Status();
   public attributes: Attribute[] = [new Attribute()]
+  
+  get level() { 
+    return this.powerPoint.level
+  }
   get defensive() {
     const currentLevel = this.powerPoint.level!
     const levelInfo = this.levelInfo.find((item) => {
@@ -48,4 +52,19 @@ export default class Character extends BaseEntity {
     const newInfo = this.levelInfo[index + 1];
     return newInfo
   }
+  public getLevelIndex() {
+    const currentLevel = this.powerPoint.level!
+    const index = this.levelInfo.findIndex((item) => {
+      return item.level === currentLevel
+    }) 
+    return index
+  }
+  public getGrowthSpeed() {
+    const growthSpeed = this.attributes.reduce((pre, cur, index) => {
+      const total = pre * cur.overlying();
+      return total
+    }, 1)
+    return growthSpeed
+  }
+
 }
