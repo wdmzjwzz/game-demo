@@ -63,6 +63,20 @@ class PlayerInfo extends Component<Partial<Props>>{
                             param: playerInfo
                         })
                     }}>突破</Button>}
+                    {
+                        playerInfo.skills.map(skill => {
+                            return <Button
+                                size={"md"}
+                                onPress={() => {
+                                    playerInfo.attack(skill, playerInfos.find(player => player.id !== playerInfo.id)!)
+                                }}
+                                style={{
+                                    marginBottom: 14
+                                }}>
+                                {skill.name}
+                            </Button>
+                        })
+                    }
 
                     <h3>灵魂信息</h3>
                     <span>灵魂HP：{playerInfo.soul.healthPoint?.currentValue}</span>
@@ -97,6 +111,7 @@ class PlayerInfo extends Component<Partial<Props>>{
                             param: playerInfo.soul
                         })
                     }}>突破</Button>}
+
                 </div>
             })}
         </div>;

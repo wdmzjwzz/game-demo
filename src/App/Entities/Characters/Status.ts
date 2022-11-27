@@ -1,4 +1,5 @@
 export enum StatusState {
+  DEAD = "DEAD",
   IDLE = "IDLE",
   TRAINING = "TRAINING",
   BREAKING = "BREAKING", //禁锢

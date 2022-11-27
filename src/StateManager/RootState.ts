@@ -14,9 +14,7 @@ export class RootState {
     setGameManager(gameManager: null | GameManager) {
         this.gameManager = gameManager
     }
-    setGameData(data: any) {
-        console.log(data,22);
-        
+    setGameData(data: any) { 
         this.gameData = data
     }
 } 

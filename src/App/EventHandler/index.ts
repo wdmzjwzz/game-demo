@@ -5,7 +5,8 @@ export enum ActionType {
     training,
     abortTrain,
     resumeTrain,
-    levelUp
+    levelUp,
+    dead
 }
 
 export interface Action {
@@ -33,6 +34,9 @@ export class EventHandler {
             case ActionType.levelUp:
                 this.onLevelUp(action)
                 break;
+            case ActionType.dead:
+                this.onDead(action)
+                break;
             default:
                 break;
         }
@@ -48,8 +52,7 @@ export class EventHandler {
         player.status.setState(StatusState.TRAINING)
         const id = this.gameManager!.addTimer(() => {
             const addedPower = player.powerPoint.baseGrowthValue * player.getGrowthSpeed()
-            player.powerPoint.compute(addedPower
-            );
+            player.powerPoint.compute(addedPower);
         }, 1)
         this.timmerIds.set(action.type + player.id, id)
     }
@@ -70,6 +73,13 @@ export class EventHandler {
         }
         player.levelUp()
         player.status.setState(StatusState.IDLE) // 突破成功
+    }
+    onDead(action: Action) {
+        let player = action.param as Player;
+        if (player.isSelf) {
+            console.log("gameOver");
+            this.gameManager?.stop()
+        }
     }
 }
 export const eventHandler = new EventHandler()
