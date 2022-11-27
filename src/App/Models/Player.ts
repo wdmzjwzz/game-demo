@@ -11,9 +11,9 @@ export class Player extends Character {
         super()
         this.gender = Gender.MALE;
         this.soul = new Soul(this)
-        const normalAttack = new NormalAttack()
-        const cureSkill = new CureSkill()
-        const renzhenyiquan = new DamageSkill()
+        const normalAttack = new NormalAttack(this)
+        const cureSkill = new CureSkill(this)
+        const renzhenyiquan = new DamageSkill(this)
         this.skills.push(normalAttack, cureSkill, renzhenyiquan)
     }
 
@@ -29,13 +29,13 @@ export class Player extends Character {
     attacked(skill: BaseSkill, source: Character) {
 
         if (skill.type === EffectType.GiveCure) {
-            const value = skill.getComputeValue(this.powerPoint.currentValue);
+            const value = skill.getComputeValue();
             this.healthPoint.compute(value)
             return
         }
 
         if (skill.applyType === ApplyType.BODY) {
-            const aggressivity = skill.getComputeValue(this.powerPoint.currentValue);
+            const aggressivity = skill.getComputeValue();
             const defensive = this.defensive;
             const heartPoint = aggressivity - defensive;
             if (heartPoint > 0) {
@@ -43,7 +43,7 @@ export class Player extends Character {
             }
         }
         if (skill.applyType === ApplyType.SOUL) {
-            const aggressivity = skill.getComputeValue(this.soul.powerPoint.currentValue);
+            const aggressivity = skill.getComputeValue();
             const defensive = this.soul.defensive;
             const heartPoint = aggressivity - defensive;
             if (heartPoint > 0) {

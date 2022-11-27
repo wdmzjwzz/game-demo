@@ -1,3 +1,4 @@
+import Character from "../../Entities/Characters/Character";
 import BaseSkill, { EffectType } from "../../Entities/Skills/BaseSkill";
 const DamageSkillInfos = [
     {
@@ -23,23 +24,20 @@ const DamageSkillInfos = [
 ]
 export class DamageSkill extends BaseSkill {
     public damageValue: number = 0;
-    constructor() {
-        super() 
+    constructor(player: Character) {
+        super(player)
         this.name = "认真一拳";
         this.type = EffectType.CauseDamage;
         this.update()
-    } 
-     
+    }
+
     update() {
         const info = DamageSkillInfos[this.currentLevel]
         this.consume = info.consume;
         this.levelLabel = info.levelLabel
         this.damageValue = info.damageValue
     }
-    getComputeValue(powerPoint: number) { 
-        if (powerPoint < this.consume) {
-            return 0
-        }
+    getComputeValue() {
         return this.damageValue
     }
 }

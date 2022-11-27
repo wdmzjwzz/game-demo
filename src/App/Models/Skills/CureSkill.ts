@@ -1,7 +1,8 @@
- 
+
+import Character from "../../Entities/Characters/Character";
 import BaseSkill, { EffectType } from "../../Entities/Skills/BaseSkill";
 
- 
+
 const CureSkillInfos = [
     {
         levelLabel: "入门",
@@ -26,24 +27,21 @@ const CureSkillInfos = [
 ]
 export class CureSkill extends BaseSkill {
 
-    constructor() {
-        super() 
+    constructor(player: Character) {
+        super(player)
         this.name = "治疗术";
         this.type = EffectType.GiveCure;
         this.update()
-    } 
+    }
     public cureValue: number = 0;
-   
+
     update() {
         const info = CureSkillInfos[this.currentLevel]
         this.consume = info.consume;
         this.levelLabel = info.levelLabel
         this.cureValue = info.cureValue
     }
-    getComputeValue(powerPoint: number) {
-        if (powerPoint < this.consume) {
-            return 0
-        }
+    getComputeValue() {
         return this.cureValue
     }
 }

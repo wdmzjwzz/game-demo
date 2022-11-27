@@ -1,3 +1,5 @@
+import Character from "../Characters/Character";
+
 export enum EffectType {
     //  造成伤害 
     CauseDamage,
@@ -17,13 +19,18 @@ export default class BaseSkill {
     public levelLabel = '';
     public consume = 0
     public currentLevel = 0
-    getComputeValue(baseAggressivity: number) {
-        return baseAggressivity
+    public player: Character
+    constructor(player: Character) {
+        this.player = player
+    }
+
+    getComputeValue() {
+        return 0
     }
     levelUp() {
         this.currentLevel++;
         this.update()
     }
-    update() { 
+    update() {
     }
 }
