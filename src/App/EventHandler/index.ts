@@ -5,6 +5,7 @@ export enum ActionType {
     training,
     abortTrain,
     resumeTrain,
+    levelUp
 }
 
 export interface Action {
@@ -21,33 +22,51 @@ export class EventHandler {
         if (!this.gameManager) {
             return
         }
-        const trainId = this.timmerIds.get(ActionType.training);
-        let player = action.param as Player
+
         switch (action.type) {
             case ActionType.training:
-                if (trainId) {
-                    return
-                }
-
-                player.status.setState(StatusState.TRAINING)
-                const id = this.gameManager?.addTimer(() => {
-                    const addedPower = player.powerPoint.baseGrowthValue * player.getGrowthSpeed()
-                    player.powerPoint.compute(addedPower);
-                }, 1)
-                this.timmerIds.set(action.type, id)
+                this.onTraining(action)
                 break;
             case ActionType.abortTrain:
-                if (trainId) {
-                    this.gameManager.removeTimer(trainId)
-                    this.timmerIds.delete(ActionType.training)
-                    player.status.setState(StatusState.IDLE)
-                }
+                this.onAbortTraining(action)
+                break;
+            case ActionType.levelUp:
+                this.onLevelUp(action, callback)
                 break;
             default:
                 break;
         }
 
     }
-
+    onTraining(action: Action, callback?: Function) {
+        const trainId = this.timmerIds.get(ActionType.training);
+        let player = action.param as Player
+        if (trainId) {
+            return
+        }
+        player.status.setState(StatusState.TRAINING)
+        const id = this.gameManager!.addTimer(() => {
+            const addedPower = player.powerPoint.baseGrowthValue * player.getGrowthSpeed()
+            player.powerPoint.compute(addedPower);
+        }, 1)
+        this.timmerIds.set(action.type, id)
+    }
+    onAbortTraining(action: Action, callback?: Function) {
+        const trainId = this.timmerIds.get(ActionType.training);
+        let player = action.param as Player
+        if (trainId) {
+            this.gameManager!.removeTimer(trainId)
+            this.timmerIds.delete(ActionType.training)
+            player.status.setState(StatusState.IDLE)
+        }
+    }
+    onLevelUp(action: Action, callback?: Function) {
+        let player = action.param as Player;
+        if (!player) {
+            throw new Error("player is undefind");
+        }
+        player.levelUp()
+        player.status.setState(StatusState.IDLE) // 突破成功
+    }
 }
 export const eventHandler = new EventHandler()

@@ -1,10 +1,10 @@
 import { HealthPoint } from "../HealthPoint";
 import { BaseEquipment } from "../Equipments";
 import { Status } from "./Status";
-import { Soul } from "./Soul";
 import { BaseEntity } from "../BaseEntity/BaseEntity";
 import { PowerPoint } from "./PowerPoint";
 import { Attribute } from "./Attribute";
+import { LevelInfo } from "../../constants";
 export enum Gender {
   MALE = "MALE",
   FAMALE = "FAMALE",
@@ -12,15 +12,40 @@ export enum Gender {
 }
 
 export default class Character extends BaseEntity {
-
-  public powerPoint = new PowerPoint()
-  public healthPoint = new HealthPoint();
-  public soul = new Soul(this);
   public displayName: string | undefined;
-  public status = new Status();
-  public baseAggressivity = 0;
-  public defensive = 1;
+
   public equipments: BaseEquipment[] = [];
-  public gender = Gender.NEUTRAL;
+  public gender = Gender.NEUTRAL; 
+  public levelInfo = LevelInfo;
+
+  public powerPoint = new PowerPoint(this)
+  public healthPoint = new HealthPoint(this);
+  public status = new Status();
   public attributes: Attribute[] = [new Attribute()]
+  get defensive() {
+    const currentLevel = this.powerPoint.level!
+    const levelInfo = this.levelInfo.find((item) => {
+      return item.level === currentLevel
+    })
+    return levelInfo?.defensive
+  }
+  get baseAggressivity() {
+    const currentLevel = this.powerPoint.level!
+    const levelInfo = this.levelInfo.find((item) => {
+      return item.level === currentLevel
+    })
+    return levelInfo?.baseAggressivity
+  }
+  public levelUp() {
+    this.powerPoint.levelUp()
+    this.healthPoint.levelUp();
+  }
+  public getNextLevel() {
+    const currentLevel = this.powerPoint.level!
+    const index = this.levelInfo.findIndex((item) => {
+      return item.level === currentLevel
+    })
+    const newInfo = this.levelInfo[index + 1];
+    return newInfo
+  }
 }

@@ -3,14 +3,10 @@ import { Soul } from "../Entities/Characters/Soul";
 
 export class Player extends Character {
     public displayName = "王铁柱";
-     
+    public soul;
     constructor() {
-        super()
-        this.healthPoint.setMaxValue(500);
-        
+        super() 
         this.gender = Gender.MALE;
-        this.baseAggressivity = 60;
-        this.defensive = 10;
         this.soul = new Soul(this)
     }
     getGrowthSpeed() {
@@ -20,5 +16,5 @@ export class Player extends Character {
         }, 1)
         return growthSpeed
     }
-     
+
 }

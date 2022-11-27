@@ -53,6 +53,13 @@ class PlayerInfo extends Component<Partial<Props>>{
                             param: playerInfo
                         })
                     }}>停止修炼</Button>}
+
+                    {playerInfo.status.state === StatusState.BREAKING && <Button onClick={() => {
+                        eventHandler.dispatch({
+                            type: ActionType.levelUp,
+                            param: playerInfo
+                        })
+                    }}>突破</Button>}
                 </div>
             })}
         </div>;

@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 export class BaseEntity {
     public id = uuidv4();
     public parent: BaseEntity | null = null;
-    public children: BaseEntity[] = []
+    public children: BaseEntity[] = [];
     addChildren(entity: BaseEntity) {
         const item = this.children.find(child => child.id === entity.id);
         if (item) {
@@ -21,5 +21,9 @@ export class BaseEntity {
 
     clear() {
         this.children = []
+    }
+
+    getNextLevel() {
+
     }
 }
