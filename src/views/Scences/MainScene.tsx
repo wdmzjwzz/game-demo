@@ -17,7 +17,8 @@ class Scene extends Component<Partial<Props>>{
       app.addTimer(() => {
         this.props.rootState!.setFPS(Number(app.fps.toFixed(2)))
       }, 0.5)
-      app.start()
+      app.start();
+      this.props.rootState?.setGameManager(app)
     }
 
   }
