@@ -1,6 +1,6 @@
 export enum StatusState{
     IDLE = "IDLE",
-    ACTIVE = "ACTIVE",
+    TRAINING = "TRAINING",
     VERTIGO = "VERTIGO", //眩晕
     IMPRISON = "IMPRISON" //禁锢
 }

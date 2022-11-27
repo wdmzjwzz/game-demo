@@ -1,5 +1,5 @@
 /* eslint-disable */
-
+ 
 import { Vector2 } from "./math/Vector2";
 
 export enum EInputEventType {
@@ -120,7 +120,7 @@ export class Application implements EventListenerObject {
 
   public isFlipYCoord: boolean = true;
 
-  public canvas: HTMLCanvasElement;
+  public canvas: HTMLCanvasElement | null = null;
 
   public isSupportMouseMove: boolean;
 
@@ -139,20 +139,13 @@ export class Application implements EventListenerObject {
   // 声明每帧回调函数
   public frameCallback: ((app: Application) => void) | null;
 
-  public constructor(canvas: HTMLCanvasElement) {
-   
-    this.canvas = canvas;
+  public constructor() {
 
-    this.canvas.addEventListener("mousedown", this, false);
-    this.canvas.addEventListener("mouseup", this, false);
-    this.canvas.addEventListener("mousemove", this, false);
-
-   
     window.addEventListener("keydown", this, false);
     window.addEventListener("keyup", this, false);
     window.addEventListener("keypress", this, false);
     window.addEventListener("wheel", this, { passive: false });
- 
+
     this._isMouseDown = false;
 
     // 默认状态下，不支持mousemove事件
@@ -164,7 +157,14 @@ export class Application implements EventListenerObject {
       return false;
     }; // 禁止右键上下文菜单
   }
+  initCanvas(canvas: HTMLCanvasElement) {
 
+    this.canvas = canvas;
+
+    this.canvas.addEventListener("mousedown", this, false);
+    this.canvas.addEventListener("mouseup", this, false);
+    this.canvas.addEventListener("mousemove", this, false);
+  }
   // 判断当前Application是否一直在调用requestAnimationFrame
   public isRunning(): boolean {
     return this._start;
@@ -218,7 +218,7 @@ export class Application implements EventListenerObject {
     this._lastTime = timeStamp;
 
     this._handleTimers(intervalSec);
-   
+
     // 先更新
     this.update(elapsedMsec, intervalSec);
     // 后渲染
@@ -236,9 +236,9 @@ export class Application implements EventListenerObject {
   // 停止动画循环
   public stop(): void {
     if (this._start) {
-       
+
       cancelAnimationFrame(this._requestId);
-     
+
       this._lastTime = -1;
       this._startTime = -1;
       this._start = false;
@@ -247,13 +247,13 @@ export class Application implements EventListenerObject {
 
   //虚方法，子类能覆写（override），用于更新
   //注意: 第二个参数是秒为单位，第一参数是毫秒为单位
-  public update(elapsedMsec: number, intervalSec: number): void {}
+  public update(elapsedMsec: number, intervalSec: number): void { }
 
   //虚方法，子类能覆写（override），用于渲染
-  public render(): void {}
+  public render(): void { }
 
- 
-  public clearCanvas() {}
+
+  public clearCanvas() { }
   // 调用dispatchXXXX虚方法进行事件分发
   // handleEvent是接口EventListenerObject定义的协议分发，必须要实现
   public handleEvent(evt: Event): void {
@@ -331,7 +331,7 @@ export class Application implements EventListenerObject {
     return;
   }
   protected getMouseCanvas(): HTMLCanvasElement {
-    return this.canvas;
+    return this.canvas!;
   }
 
   // 将鼠标事件发生时鼠标指针的位置变换为相对当前canvas元素的偏移表示

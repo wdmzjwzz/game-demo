@@ -3,7 +3,7 @@ import { BaseEquipment } from "../Equipments";
 import { Status } from "./Status";
 import { Soul } from "./Soul";
 import { BaseEntity } from "../BaseEntity/BaseEntity";
-import { PowerPoint } from "../HealthPoint/PowerPoint";
+import { PowerPoint } from "./PowerPoint";
 import { Attribute } from "./Attribute";
 export enum Gender {
   MALE = "MALE",

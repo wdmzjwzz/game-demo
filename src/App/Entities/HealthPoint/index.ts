@@ -16,6 +16,6 @@ export class HealthPoint {
    */
   compute(value: number) {
     const realValue = value + this.currentValue;
-    this.setCurrentValue(realValue);
+    this.setCurrentValue(Number(realValue.toFixed()));
   }
 }

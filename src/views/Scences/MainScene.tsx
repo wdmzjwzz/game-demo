@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { inject, observer } from 'mobx-react';
 import { RootStateManager } from "../../StateManager";
-import { GameManager } from "../../App/GameManager";
+import { gameManager, GameManager } from "../../App/GameManager";
 
 interface Props extends RootStateManager {
 
@@ -12,13 +12,13 @@ interface Props extends RootStateManager {
 class Scene extends Component<Partial<Props>>{
   private canvasRef = React.createRef<HTMLCanvasElement>()
   componentDidMount(): void {
-    if (this.canvasRef.current) {
-      const app = new GameManager(this.canvasRef.current);
-      app.addTimer(() => {
-        this.props.rootState!.setFPS(Number(app.fps.toFixed(2)))
+    if (this.canvasRef.current) { 
+      gameManager.initCanvas(this.canvasRef.current)
+      gameManager.addTimer(() => {
+        this.props.rootState!.setFPS(Number(gameManager.fps.toFixed(2)))
       }, 0.5)
-      app.start();
-      this.props.rootState?.setGameManager(app)
+      this.props.rootState!.setGameManager(gameManager)
+      gameManager.start();
     }
 
   }

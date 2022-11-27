@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { inject, observer } from 'mobx-react';
 import { RootStateManager } from "../../StateManager";
-import { GameManager } from "../../App/GameManager";
 import { Player } from "../../App/Models/Player";
+import { Button } from "@nextui-org/react";
+import { ActionType, eventHandler } from "../../App/EventHandler";
+import { StatusState } from "../../App/Entities/Characters/Status";
 
 interface Props extends RootStateManager {
 
@@ -16,10 +18,11 @@ class PlayerInfo extends Component<Partial<Props>>{
 
     }
     train(player: Player) {
-        this.props.rootState?.gameManager?.addTimer(() => {
-            const addedPower = player.powerPoint.baseGrowthValue * player.getGrowthSpeed()
-            player.powerPoint.compute(addedPower)
-        }, 1)
+        eventHandler.dispatch({
+            type: ActionType.training,
+            param: player
+        })
+
     }
     render() {
         const { gameData } = this.props.rootState!
@@ -34,9 +37,22 @@ class PlayerInfo extends Component<Partial<Props>>{
                     <span>法力值：{playerInfo.powerPoint.currentValue}/{playerInfo.powerPoint.maxValue}</span>
                     <span>魂力：{playerInfo.soul.healthPoint.currentValue}</span>
 
-                    <button onClick={() => {
-                        this.train(playerInfo)
-                    }}>修炼</button>
+                    <Button
+                        size={"md"}
+                        onClick={() => {
+                            this.train(playerInfo)
+                        }}
+                        style={{
+                            marginBottom: 14
+                        }}>
+                        修炼
+                    </Button>
+                    {playerInfo.status.state === StatusState.TRAINING && <Button onClick={() => {
+                        eventHandler.dispatch({
+                            type: ActionType.abortTrain,
+                            param: playerInfo
+                        })
+                    }}>停止修炼</Button>}
                 </div>
             })}
         </div>;
