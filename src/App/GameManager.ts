@@ -3,6 +3,7 @@ import rootStateManager from "../StateManager";
 import { Application } from "./Application";
 import { Attribute, AttributeLevel, AttributeType } from "./Entities/Characters/Attribute";
 import Character from "./Entities/Characters/Character";
+import { StatusState } from "./Entities/Characters/Status";
 import { eventHandler } from "./EventHandler";
 import { Player } from "./Models/Player";
 import { Scene } from "./Scenes/Scene";
@@ -50,6 +51,9 @@ export class GameManager extends Application {
     autoRecover() {
         this.scene.children.forEach(entity => {
             const character = entity as Character
+            if (character.status.state === StatusState.DEAD) {
+                return
+            }
             if (character.healthPoint) {
                 character.healthPoint.recover()
             }

@@ -1,3 +1,4 @@
+import { BaseEntity } from "../BaseEntity/BaseEntity";
 import Character from "../Characters/Character";
 
 export enum EffectType {
@@ -12,7 +13,7 @@ export enum ApplyType {
     BODY,
     SOUL
 }
-export default class BaseSkill {
+export default class BaseSkill extends BaseEntity {
     public applyType: ApplyType = ApplyType.BODY
     public name: string = '';
     public type = EffectType.CauseDamage;
@@ -21,7 +22,8 @@ export default class BaseSkill {
     public currentLevel = 0
     public player: Character
     constructor(player: Character) {
-        this.player = player; 
+        super()
+        this.player = player;
     }
 
     getComputeValue() {

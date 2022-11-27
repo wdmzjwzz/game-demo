@@ -67,6 +67,7 @@ class PlayerInfo extends Component<Partial<Props>>{
                         playerInfo.skills.map(skill => {
                             return <Button
                                 size={"md"}
+                                key={skill.id}
                                 onPress={() => {
                                     playerInfo.attack(skill, playerInfos.find(player => player.id !== playerInfo.id)!)
                                 }}
