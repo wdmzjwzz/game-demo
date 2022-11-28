@@ -1,5 +1,5 @@
-import { BaseEntity } from "../BaseEntity/BaseEntity";
-import Character from "../Characters/Character";
+import { BaseEntity } from "../Entities/BaseEntity/BaseEntity";
+import Character from "../Entities/Characters/Character";
 
 export enum EffectType {
     //  造成伤害 

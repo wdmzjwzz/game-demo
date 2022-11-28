@@ -1,5 +1,5 @@
 import Character from "../Entities/Characters/Character";
-import BaseSkill, { EffectType } from "../Entities/Skills/BaseSkill";
+import BaseSkill, { EffectType } from "./BaseSkill";
 const DamageSkillInfos = [
     {
         levelLabel: "入门",

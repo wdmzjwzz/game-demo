@@ -1,6 +1,6 @@
 import Character, { Gender } from "../Entities/Characters/Character";
 import { Soul } from "../Entities/Characters/Soul";
-import BaseSkill, { ApplyType, EffectType } from "../Entities/Skills/BaseSkill";
+import BaseSkill, { ApplyType, EffectType } from "../Skills/BaseSkill";
 import { CureSkill, DamageSkill, NormalAttack } from "../Skills";
 import { Package } from "./Package";
 

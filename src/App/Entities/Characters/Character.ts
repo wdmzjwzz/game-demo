@@ -5,7 +5,7 @@ import { BaseEntity } from "../BaseEntity/BaseEntity";
 import { PowerPoint } from "./PowerPoint";
 import { Attribute } from "./Attribute";
 import { LevelInfo } from "../../constants";
-import BaseSkill from "../Skills/BaseSkill";
+import BaseSkill from "../../Skills/BaseSkill";
 export enum Gender {
   MALE = "MALE",
   FAMALE = "FAMALE",
