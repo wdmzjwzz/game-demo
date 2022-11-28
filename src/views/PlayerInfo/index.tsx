@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { inject, observer } from 'mobx-react';
 import { RootStateManager } from "../../StateManager";
-import { Player } from "../../App/Models/Player";
+import { Player } from "../../App/PlayerModels/Player";
 import { Button } from "@nextui-org/react";
 import { ActionType, eventHandler } from "../../App/EventHandler";
 import { StatusState } from "../../App/Entities/Characters/Status";

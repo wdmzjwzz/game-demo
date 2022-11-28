@@ -1,5 +1,5 @@
 import { BaseSkill } from ".";
-import Character from "../../Entities/Characters/Character";
+import Character from "../Entities/Characters/Character";
 
 export class NormalAttack extends BaseSkill {
     public player: Character

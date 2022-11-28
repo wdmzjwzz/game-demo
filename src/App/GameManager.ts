@@ -5,7 +5,7 @@ import { Attribute, AttributeLevel, AttributeType } from "./Entities/Characters/
 import Character from "./Entities/Characters/Character";
 import { StatusState } from "./Entities/Characters/Status";
 import { eventHandler } from "./EventHandler";
-import { Player } from "./Models/Player";
+import { Player } from "./PlayerModels/Player";
 import { Scene } from "./Scenes/Scene";
 
 export class GameManager extends Application {

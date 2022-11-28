@@ -1,6 +1,6 @@
 import { StatusState } from "../Entities/Characters/Status";
 import { GameManager } from "../GameManager";
-import { Player } from "../Models/Player";
+import { Player } from "../PlayerModels/Player";
 export enum ActionType {
     training,
     abortTrain,

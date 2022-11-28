@@ -1,5 +1,5 @@
 import { HealthPoint } from "../HealthPoint";
-import { BaseEquipment } from "../Equipments";
+import { BaseEquipment } from "../../Equipments";
 import { Status } from "./Status";
 import { BaseEntity } from "../BaseEntity/BaseEntity";
 import { PowerPoint } from "./PowerPoint";
