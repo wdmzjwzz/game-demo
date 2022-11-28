@@ -1,6 +1,8 @@
 
+import { Application } from "pixi.js";
+import GameHelpTools from "../lib/GameHelpTools";
 import rootStateManager from "../StateManager";
-import { Application } from "./Application";
+import { GApplication } from "./Application";
 import { Attribute, AttributeLevel, AttributeType } from "./Entities/Characters/Attribute";
 import Character from "./Entities/Characters/Character";
 import { StatusState } from "./Entities/Characters/Status";
@@ -8,7 +10,7 @@ import { eventHandler } from "./EventHandler";
 import { Player } from "./PlayerModels/Player";
 import { Scene } from "./Scenes/Scene";
 
-export class GameManager extends Application {
+export class GameManager extends GApplication {
     static _instance: GameManager;
     static get instance() {
         if (!GameManager._instance) {
@@ -16,8 +18,13 @@ export class GameManager extends Application {
         }
         return GameManager._instance
     }
-    public autoRecoverTimmer = -1
+    public autoRecoverTimmer = -1;
+    public pixiAPP: Application | null = null;
     public scene: Scene = new Scene();
+    initPixiApp(container: HTMLDivElement) {
+        this.pixiAPP = GameHelpTools.createPixiApp(window.document.documentElement.clientWidth, window.document.documentElement.clientHeight);
+        container.appendChild(this.pixiAPP.view as unknown as Node)
+    }
     start() {
         if (this.autoRecoverTimmer !== -1) {
             this.removeTimer(this.autoRecoverTimmer);

@@ -24,9 +24,9 @@ export class PowerPoint extends HealthPoint {
     return info?.level;
   }
   recover() {
-    if (this.parent.state === StatusState.IDLE) {
-      this.compute(this.baseRecover)
-    }
+    // if (this.parent.state === StatusState.IDLE) {
+    //   this.compute(this.baseRecover)
+    // }
   }
   public setCurrentValue(value: number) {
     const realValue = Math.max(0, value);
