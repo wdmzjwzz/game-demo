@@ -30,7 +30,7 @@ export class Player extends Character {
 
         if (skill.type === EffectType.GiveCure) {
             const value = skill.getComputeValue();
-            this.healthPoint.compute(value)
+            this.healthPoint?.compute(value)
             return
         }
 
@@ -39,7 +39,7 @@ export class Player extends Character {
             const defensive = this.defensive;
             const heartPoint = aggressivity - defensive;
             if (heartPoint > 0) {
-                this.healthPoint.compute(-heartPoint)
+                this.healthPoint?.compute(-heartPoint)
             }
         }
         if (skill.applyType === ApplyType.SOUL) {
@@ -47,7 +47,7 @@ export class Player extends Character {
             const defensive = this.soul.defensive;
             const heartPoint = aggressivity - defensive;
             if (heartPoint > 0) {
-                this.soul.healthPoint.compute(-heartPoint)
+                this.soul.powerPoint.compute(-heartPoint)
             }
         }
 

@@ -79,8 +79,7 @@ class PlayerInfo extends Component<Partial<Props>>{
                         })
                     }
 
-                    <h3>灵魂信息</h3>
-                    <span>灵魂HP：{playerInfo.soul.healthPoint?.currentValue}</span>
+                    <h3>灵魂信息</h3> 
                     <span>修为：{playerInfo.soul.powerPoint.level}</span>
                     <span>魂力：{playerInfo.soul.powerPoint.currentValue}/{playerInfo.soul.powerPoint.maxValue}</span>
 

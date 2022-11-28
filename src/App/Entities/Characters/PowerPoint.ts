@@ -8,37 +8,44 @@ import { Soul } from "./Soul";
  * 法力
  */
 export class PowerPoint extends HealthPoint {
-    constructor(parent: Character | Soul) {
-        super(parent)
-        this.maxValue = this.parent.levelInfo[0].maxPowerPoint;
-        this.currentValue = 0;
-        this.baseGrowthValue = this.parent.levelInfo[0].baseGrowthValue || 0;
-        this.baseRecover = 1
-    }
-    public baseGrowthValue  //每秒增加法力值
-    public currentValue;
-    public maxValue;
+  constructor(parent: Character | Soul) {
+    super(parent);
+    this.maxValue = this.parent.levelInfo[0].maxPowerPoint;
+    this.currentValue = 0;
+    this.baseGrowthValue = this.parent.levelInfo[0].baseGrowthValue || 0;
+    this.baseRecover = 5;
+  }
+  public baseGrowthValue; //每秒增加法力值
+  public currentValue;
+  public maxValue;
 
-    get level() {
-        const info = this.parent.levelInfo.find((item) => item.maxPowerPoint === this.maxValue)
-        return info?.level
+  get level() {
+    const info = this.parent.levelInfo.find(
+      (item) => item.maxPowerPoint === this.maxValue
+    );
+    return info?.level;
+  }
+  public setCurrentValue(value: number) {
+    const realValue = Math.max(0, value);
+    this.currentValue = realValue;
+    requestAnimationFrame(() => {
+      if (this.currentValue < 20 && this.parent instanceof Soul) {
+        this.parent.body.status.setState(StatusState.VERTIGO);
+      }
+    });
+  }
+  compute(value: number) {
+    const realValue = value + this.currentValue;
+    this.setCurrentValue(Number(realValue.toFixed()));
+    if (this.currentValue >= this.maxValue) {
+      this.parent.status.setState(StatusState.BREAKING);
     }
-    public setCurrentValue(value: number) {
-        const realValue = Math.max(0, value);
-        this.currentValue = realValue; 
+  }
+  public levelUp(): void {
+    const newInfo = this.parent.getNextLevel();
+    if (newInfo) {
+      this.setMaxValue(newInfo.maxPowerPoint);
+      this.baseGrowthValue = newInfo.baseGrowthValue || 0;
     }
-    compute(value: number) {
-        const realValue = value + this.currentValue;
-        this.setCurrentValue(Number(realValue.toFixed()));
-        if (this.currentValue >= this.maxValue) {
-            this.parent.status.setState(StatusState.BREAKING)
-        }
-    }
-    public levelUp(): void {
-        const newInfo = this.parent.getNextLevel()
-        if (newInfo) {
-            this.setMaxValue(newInfo.maxPowerPoint);
-            this.baseGrowthValue = newInfo.baseGrowthValue || 0
-        }
-    }
+  }
 }
