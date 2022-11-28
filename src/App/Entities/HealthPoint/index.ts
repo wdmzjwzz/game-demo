@@ -1,5 +1,5 @@
 
-import { action } from "mobx";
+ 
 import { ActionType, eventHandler } from "../../EventHandler";
 import Character from "../Characters/Character";
 import { Soul } from "../Characters/Soul";

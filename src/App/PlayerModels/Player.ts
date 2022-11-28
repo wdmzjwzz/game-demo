@@ -20,6 +20,9 @@ export class Player extends Character {
   }
 
   attack(skill: BaseSkill, target: Character) {
+    if (skill.disable) {
+      return;
+    }
     const consumePowerPoint = skill.consume;
     if (this.powerPoint.currentValue < consumePowerPoint) {
       return;
