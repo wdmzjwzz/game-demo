@@ -1,6 +1,6 @@
 import { HealthPoint } from "../HealthPoint";
 import { BaseEquipment } from "../../Equipments";
-import { Status } from "./Status";
+import { Status, StatusState } from "./Status";
 import { BaseEntity } from "../BaseEntity/BaseEntity";
 import { PowerPoint } from "./PowerPoint";
 import { Attribute } from "./Attribute";
@@ -23,7 +23,8 @@ export default class Character extends BaseEntity {
 
   public powerPoint = new PowerPoint(this);
   public healthPoint: HealthPoint | null = new HealthPoint(this);
-  public status = new Status();
+  public state = StatusState.IDLE;
+
   public attributes: Attribute[] = [new Attribute()];
   public skills: BaseSkill[] = [];
   get level() {
@@ -42,6 +43,9 @@ export default class Character extends BaseEntity {
       return item.level === currentLevel;
     });
     return levelInfo?.baseAggressivity || 0;
+  }
+  setState(state: StatusState) {
+    this.state = state;
   }
   public levelUp() {
     this.powerPoint.levelUp();
@@ -71,6 +75,6 @@ export default class Character extends BaseEntity {
     const growthSpeed = (totalSpeed / length) * Math.pow(0.9, length - 1);
     return growthSpeed * this.outerbuff;
   }
-  attack(skill: BaseSkill, target: Character) {}
-  attacked(skill: BaseSkill, source: Character) {}
+  attack(skill: BaseSkill, target: Character) { }
+  attacked(skill: BaseSkill, source: Character) { }
 }

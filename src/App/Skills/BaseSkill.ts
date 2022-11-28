@@ -10,8 +10,7 @@ export enum EffectType {
   AssignEffect,
 }
 export enum ApplyType {
-  BODY,
-  SOUL,
+  BODY, 
 }
 export default class BaseSkill extends BaseEntity {
   public applyType: ApplyType = ApplyType.BODY;

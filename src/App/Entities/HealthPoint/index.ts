@@ -1,21 +1,20 @@
 
  
 import { ActionType, eventHandler } from "../../EventHandler";
-import Character from "../Characters/Character";
-import { Soul } from "../Characters/Soul";
-import { StatusState } from "../Characters/Status";
+import Character from "../Characters/Character"; 
+import { Status, StatusState } from "../Characters/Status";
 
 export class HealthPoint {
-  public parent: Character | Soul
+  public parent: Character 
   public maxValue;
   public currentValue;
   public baseRecover = 1
-  constructor(parent: Character | Soul) {
+  constructor(parent: Character ) {
     this.parent = parent;
     this.maxValue = this.parent.levelInfo[0].maxHealthPoint;
     this.currentValue = this.maxValue
   }
-  recover() {
+  recover() { 
     this.compute(this.baseRecover)
   }
   public setMaxValue(value: number) {
@@ -26,7 +25,7 @@ export class HealthPoint {
     this.currentValue = realValue;
     if (this.currentValue === 0) {
       requestAnimationFrame(() => {
-        this.parent.status.setState(StatusState.DEAD);
+        this.parent.setState(StatusState.DEAD);
         eventHandler.dispatch({
           type: ActionType.dead,
           param: this.parent

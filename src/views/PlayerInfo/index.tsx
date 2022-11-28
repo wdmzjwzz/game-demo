@@ -50,14 +50,14 @@ class PlayerInfo extends Component<Partial<Props>>{
                         }}>
                         修炼
                     </Button>
-                    {playerInfo.status.state === StatusState.TRAINING && <Button onClick={() => {
+                    {playerInfo.state === StatusState.TRAINING && <Button onClick={() => {
                         eventHandler.dispatch({
                             type: ActionType.abortTrain,
                             param: playerInfo
                         })
                     }}>停止修炼</Button>}
 
-                    {playerInfo.status.state === StatusState.BREAKING && <Button onClick={() => {
+                    {playerInfo.state === StatusState.BREAKING && <Button onClick={() => {
                         eventHandler.dispatch({
                             type: ActionType.levelUp,
                             param: playerInfo
@@ -77,41 +77,7 @@ class PlayerInfo extends Component<Partial<Props>>{
                                 {skill.name}
                             </Button>
                         })
-                    }
-
-                    <h3>灵魂信息</h3> 
-                    <span>修为：{playerInfo.soul.powerPoint.level}</span>
-                    <span>魂力：{playerInfo.soul.powerPoint.currentValue}/{playerInfo.soul.powerPoint.maxValue}</span>
-
-                    <span>攻击力：{playerInfo.soul.aggressivity}</span>
-                    <span>防御力：{playerInfo.soul.defensive}</span>
-                    <Button
-                        size={"md"}
-                        onClick={() => {
-                            eventHandler.dispatch({
-                                type: ActionType.training,
-                                param: playerInfo.soul
-                            })
-                        }}
-                        style={{
-                            marginBottom: 14
-                        }}>
-                        修炼
-                    </Button>
-                    {playerInfo.soul.status.state === StatusState.TRAINING && <Button onClick={() => {
-                        eventHandler.dispatch({
-                            type: ActionType.abortTrain,
-                            param: playerInfo.soul
-                        })
-                    }}>停止修炼</Button>}
-
-                    {playerInfo.soul.status.state === StatusState.BREAKING && <Button onClick={() => {
-                        eventHandler.dispatch({
-                            type: ActionType.levelUp,
-                            param: playerInfo.soul
-                        })
-                    }}>突破</Button>}
-
+                    } 
                 </div>
             })}
         </div>;

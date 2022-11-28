@@ -51,7 +51,7 @@ export class GameManager extends Application {
     autoRecover() {
         this.scene.children.forEach(entity => {
             const character = entity as Character
-            if (character.status.state === StatusState.DEAD) {
+            if (character.state === StatusState.DEAD) {
                 return
             }
             if (character.healthPoint) {

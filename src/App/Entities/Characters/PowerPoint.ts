@@ -1,14 +1,12 @@
 import { HealthPoint } from "../HealthPoint";
-import { ActionType, eventHandler } from "../../EventHandler";
 import { StatusState } from "./Status";
 import Character from "./Character";
-import { Soul } from "./Soul";
 
 /**
  * 法力
  */
 export class PowerPoint extends HealthPoint {
-  constructor(parent: Character | Soul) {
+  constructor(parent: Character) {
     super(parent);
     this.maxValue = this.parent.levelInfo[0].maxPowerPoint;
     this.currentValue = 0;
@@ -21,24 +19,24 @@ export class PowerPoint extends HealthPoint {
 
   get level() {
     const info = this.parent.levelInfo.find(
-      (item) => item.maxPowerPoint === this.maxValue
+      item => item.maxPowerPoint === this.maxValue
     );
     return info?.level;
+  }
+  recover() {
+    if (this.parent.state === StatusState.IDLE) {
+      this.compute(this.baseRecover)
+    }
   }
   public setCurrentValue(value: number) {
     const realValue = Math.max(0, value);
     this.currentValue = realValue;
-    requestAnimationFrame(() => {
-      if (this.currentValue < 20 && this.parent instanceof Soul) {
-        this.parent.body.status.setState(StatusState.VERTIGO);
-      }
-    });
   }
   compute(value: number) {
     const realValue = value + this.currentValue;
     this.setCurrentValue(Number(realValue.toFixed()));
     if (this.currentValue >= this.maxValue) {
-      this.parent.status.setState(StatusState.BREAKING);
+      this.parent.setState(StatusState.BREAKING);
     }
   }
   public levelUp(): void {

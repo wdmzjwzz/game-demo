@@ -49,7 +49,7 @@ export class EventHandler {
         if (trainId) {
             return
         }
-        player.status.setState(StatusState.TRAINING);
+        player.setState(StatusState.TRAINING);
  
         const id = this.gameManager!.addTimer(() => {
             const addedPower = player.powerPoint.baseGrowthValue * player.getGrowthSpeed()
@@ -64,7 +64,7 @@ export class EventHandler {
         if (trainId) {
             this.gameManager!.removeTimer(trainId)
             this.timmerIds.delete(ActionType.training + player.id)
-            player.status.setState(StatusState.IDLE)
+            player.setState(StatusState.IDLE)
         }
     }
     onLevelUp(action: Action) {
@@ -73,7 +73,7 @@ export class EventHandler {
             throw new Error("player is undefind");
         }
         player.levelUp()
-        player.status.setState(StatusState.IDLE) // 突破成功
+        player.setState(StatusState.IDLE) // 突破成功
     }
     onDead(action: Action) {
         let player = action.param as Player;
