@@ -23,7 +23,7 @@ export class GameManager extends GApplication {
     public scene: Scene = new Scene();
     initPixiApp(container: HTMLDivElement) {
         this.pixiAPP = GameHelpTools.createPixiApp(window.document.documentElement.clientWidth, window.document.documentElement.clientHeight);
-        container.appendChild(this.pixiAPP.view as unknown as Node)
+        container.appendChild(this.pixiAPP.view as unknown as Node); 
     }
     start() {
         if (this.autoRecoverTimmer !== -1) {
