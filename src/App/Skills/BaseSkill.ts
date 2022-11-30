@@ -1,4 +1,5 @@
 import { BaseEntity } from "../Entities/BaseEntity/BaseEntity";
+import { AttributeType } from "../Entities/Characters/Attribute";
 import Character from "../Entities/Characters/Character";
 
 export enum EffectType {
@@ -10,7 +11,7 @@ export enum EffectType {
   AssignEffect,
 }
 export enum ApplyType {
-  BODY, 
+  BODY,
 }
 export default class BaseSkill extends BaseEntity {
   public applyType: ApplyType = ApplyType.BODY;
@@ -22,6 +23,7 @@ export default class BaseSkill extends BaseEntity {
   public CD = 0;
   public disable = false;
   public owner: Character;
+  public attribute: AttributeType | null = AttributeType.HUO;
   private _timer = -1;
   constructor(owner: Character) {
     super();
